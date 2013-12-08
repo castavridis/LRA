@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+	<head>
+		<title>LRA Project</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Foundation | Welcome</title>
+
+		<script type="text/javascript" src="//use.typekit.net/utz2gao.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+		<script src='//api.tiles.mapbox.com/mapbox.js/v1.5.1/mapbox.js'></script>
+		<script src="_/js/vendor/modernizr.js"></script>
+
+		<link rel="stylesheet" href="_/css/style.css" />
+		<link href='//api.tiles.mapbox.com/mapbox.js/v1.5.1/mapbox.css' rel='stylesheet' />
+	</head>
+	<body>
+		<div id="project-description" class="row">
+			<h1 class="small-12 columns">Land Reutilization Authority</h1>
+			<h3 class="small-12 columns">Maecenas sed diam eget risus varius blandit sit amet non magna.</h3>
+			<p class="small-6 columns">
+				Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+			</p>
+			<p class="small-6 columns">
+				Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec id elit non mi porta gravida at eget metus. Donec sed odio dui.
+			</p>
+		</div>
+		<div id="map-container" class="small-12">
+			<div id="data-layers" class="small-12 columns clearfix">
+				<ul class="navigation left small-6">
+					<li>Layer One</li>
+					<li>Layer Two</li>
+					<li>Layer Three</li>
+				</ul>
+				<ul class="navigation right small-6">
+					<li class="dev">Objectives</li>
+					<li>Toggle One</li>
+					<li>Toggle Two</li>
+				</ul>				
+			</div>
+			<div id="map-view" class="small-12 columns">
+				<div id="objectives-view" class="small-3 columns dev">
+					<h3>Primary Objectives:</h3>
+					<ul>
+						<li>MapBox integration</li>
+						<li>Data integration</li>
+						<li>Bubble View</li>
+						<li>Parcel View</li>
+						<li>Legend</li>
+						<li>Hover Data</li>
+					</ul>
+
+					<h3>Secondary Objectives:</h3>
+					<ul>
+						<li>A static title.</li>
+						<li>The ability to switch between parcel and bubble view regardless of zoom level.</li>
+						<li>Sexier styling of the legend and hover data.</li>
+						<li>% of vacancy within window area.</li>
+						<li>A switchable layer of crime data from police records.</li>
+						<li>A switchable layer of economic data from ACS datasets.</li>
+						<li>Automatic updates from changes in the data.</li>
+						<li>Possible some simple D3 visualizations of the available information.</li>
+						<li>Probably some cool stuff I don't know is possible.</li>
+					</ul>
+				</div>
+				<div id="list-view" class="small-5 columns"></div>
+				<div id="detail-view" class='small-4 columns'></div>
+				<div class="location-view">
+					<div class="modal"></div>
+					<div class="pin"></div>
+				</div>
+			</div>
+		</div>
+		<div id="contact" class="row">
+			<h4>
+				<small>About. Contact.</small>
+			</h4>
+		</div>
+		
+		<script src="_/js/vendor/jquery.js"></script>
+		<script src="_/js/vendor/foundation.min.js"></script>
+		<script src="_/js/main.js"></script>
+		<script>
+		  $(document).foundation();
+		</script>
+	</body>
+</html>

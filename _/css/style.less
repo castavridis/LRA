@@ -1,0 +1,85 @@
+@import "foundation.css";
+
+html, body {
+	background-color:floralwhite;
+}
+
+#project-description {
+	margin-top:5rem!important;
+	h1 {
+		font-family:"adelle";
+		font-weight:300;
+	}
+	h3 {
+		font-family:"adelle";
+		font-weight:300;
+		font-style:oblique;
+		padding-bottom:1.5rem;
+		margin-bottom:1rem;
+		border-bottom:1px solid black;
+	}
+	p {
+		font-family:"ff-tisa-web-pro";
+		font-size:1.25rem;
+		line-height:2.25rem;
+	}
+}
+
+#map-container {
+	background-color:white;
+	height:500px;
+	margin:3rem 0;
+}
+
+#data-layers {
+	height:44px;
+	background-color:tan;
+}
+
+#map-view, #list-view, #detail-view, #objectives-view {
+	height:100%;
+}
+
+#map-view {
+	background-color:antiquewhite;
+}
+
+#list-view, #detail-view, #objectives-view {
+	right:0px;
+	position:absolute;
+	overflow-y:auto;
+}
+
+#objectives-view {
+	background-color:salmon;
+	z-index:3;
+}
+
+#list-view {
+	background-color:orange;
+	z-index:1;
+}
+
+#detail-view {
+	background-color:aquamarine;
+	z-index:2;
+}
+
+.navigation {
+	margin:0;
+	&.right {
+		text-align: right;
+		li {
+			border-left:1px solid beige;
+		}
+	}
+	&.left {
+		li {
+			border-right:1px solid beige;
+		}
+	}
+	li {
+		display:inline-block;
+		padding:0.5rem 1rem;
+	}
+}
