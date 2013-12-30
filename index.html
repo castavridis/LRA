@@ -9,13 +9,17 @@
 		<script type="text/javascript" src="//use.typekit.net/utz2gao.js"></script>
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 		<script src='//api.tiles.mapbox.com/mapbox.js/v1.5.1/mapbox.js'></script>
+		<script src = "_/js/vendor/proj4-compressed.js"></script>
+		<!--<script src = "_/js/vendor/proj4leaflet.js"></script>-->
+		<!--<script src = "_/js/vendor/leaflet.geocsv.js"></script>-->
+
 		<script src="_/js/vendor/modernizr.js"></script>
 
 		<link rel="stylesheet" href="_/css/style.css" />
 		<link href='//api.tiles.mapbox.com/mapbox.js/v1.5.1/mapbox.css' rel='stylesheet' />
 	</head>
 	<body>
-		<div id="project-description" class="row">
+<!-- 		<div id="project-description" class="row">
 			<h1 class="small-12 columns">Land Reutilization Authority</h1>
 			<h3 class="small-12 columns">Maecenas sed diam eget risus varius blandit sit amet non magna.</h3>
 			<p class="small-6 columns">
@@ -24,7 +28,7 @@
 			<p class="small-6 columns">
 				Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec id elit non mi porta gravida at eget metus. Donec sed odio dui.
 			</p>
-		</div>
+		</div> -->
 		<div id="map-container" class="small-12">
 			<div id="data-layers" class="small-12 columns clearfix">
 				<ul class="navigation left small-6">
@@ -48,6 +52,10 @@
 						<li>Parcel View</li>
 						<li>Legend</li>
 						<li>Hover Data</li>
+						<li>Filters for price range, vacancy, type, etc.</li>
+						<li>A switchable layer of crime data from police records.</li>
+						<li>Automatic updates from changes in the data.</li>
+						<li>% of vacancy within window area.</li>
 					</ul>
 
 					<h3>Secondary Objectives:</h3>
@@ -55,16 +63,20 @@
 						<li>A static title.</li>
 						<li>The ability to switch between parcel and bubble view regardless of zoom level.</li>
 						<li>Sexier styling of the legend and hover data.</li>
-						<li>% of vacancy within window area.</li>
-						<li>A switchable layer of crime data from police records.</li>
+					</ul>
+
+					<h3>Tertiary Objectives:</h3>
+					<ul>
 						<li>A switchable layer of economic data from ACS datasets.</li>
-						<li>Automatic updates from changes in the data.</li>
 						<li>Possible some simple D3 visualizations of the available information.</li>
 						<li>Probably some cool stuff I don't know is possible.</li>
 					</ul>
 				</div>
+
 				<div id="list-view" class="small-5 columns"></div>
+				
 				<div id="detail-view" class='small-4 columns'></div>
+				
 				<div class="location-view">
 					<div class="modal"></div>
 					<div class="pin"></div>

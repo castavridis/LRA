@@ -37,6 +37,7 @@ body {
 #detail-view,
 #objectives-view {
   height: 100%;
+  display: none;
 }
 #map-view {
   background-color: antiquewhite;
