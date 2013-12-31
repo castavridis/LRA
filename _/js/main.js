@@ -8,8 +8,6 @@
 	- Color code CSV data based on use
  */
 
-// var tileJSON = $.get('http://api.tiles.mapbox.com/v1/castavridis.ghee5le5');
-
 /* CONSTANTS ***************************/
 var TILE_JSON = "http://a.tiles.mapbox.com/v1/castavridis.ghee5le5.json"; //TMS Tile system.
 var 	map, 
@@ -25,16 +23,33 @@ $(document).ready(function(){
 		maxBounds:[[38.5322,-90.4188],[38.7425,-90.0728]]
 	});
 
+	//Add parcel features
+	getParcels();
+
 	//Add bubble features
 	getBubbles();
 
-	//Add parcel features
-	getParcels();
+	//Apply percentage calculated events
+	map.on('zoomend', markersInView);
+	map.on('drag', markersInView);
+	map.on('moveend', markersInView);
+
+	// disable zoom handlers
+	map.touchZoom.disable();
+	map.doubleClickZoom.disable();
+	map.scrollWheelZoom.disable();
+
+	// disable tap handler, if present.
+	if (map.tap) map.tap.disable();
+
+	$('.dev').on('click', function(){
+		$('#objectives-view').toggle();
+	});
+
 });
 
-var viewableArea;
-function percentInView(){
-	viewableArea = 0;
+function markersInView(){
+	var viewableArea = 0;
 
 	$.get('_/php/parcels.php', function(data){
 		//Get map bounds
@@ -54,23 +69,43 @@ function percentInView(){
 				var x = coordinates[1];
 				var y = coordinates[0];
 
-				//TODO: If x is out of bounds, adjust x
-				//TODO: If y is out of bounds, adjust y
-				
 				coordArr.push(L.latLng(x, y));	
 			}
 
-			//Check if bound is in view
+			//Check make bound to test
 			var bound = L.polyline(coordArr, {}).getBounds();
 
 			//If is viewable, get area
 			if (bounds.contains(bound)){
+				for (var k = 0; k < coordArr.length - 1; k++) {
+					//NOTE: Use better checking like bounds.contains()
+					x = coordArr[k].lat;
+					y = coordArr[k].lng;
+
+					//If x is out of bounds, adjust x
+					if (x > bounds._northEast.lat) { 
+						x = bounds._northEast.lat;
+					} else if(x < bounds._southWest.lat) {
+						x = bounds._southWest.lat;
+					}
+					//If y is out of bounds, adjust y
+					if (y > bounds._northEast.lng) {
+						y = bounds._northEast.lng;
+					} else if (y > bounds._southWest.lng) {
+						y = bound._southWest.lng;
+					}
+				}
+
 				viewableArea += polygonArea(coordArr);
 			}
-		};
-	});
+		}
 
-	return viewableArea/totalArea * 100;
+		percentInView(viewableArea);
+	});
+}
+
+function percentInView(viewableArea) {
+	document.getElementById('percent').innerHTML = Math.min(100, Math.round(((viewableArea/totalArea + 0.01) * 100) * 100)/100);
 }
 
 function getBubbles() {
@@ -98,13 +133,13 @@ function getBubbles() {
 
 function getParcels() {
 	$.get('_/php/parcels.php', function(data){
+		
 		//Add feature group to map.
 		var featureGroup = L.featureGroup().addTo(map);
-		
 		var poly_options = {
 			stroke: false,
-			fillColor: '#09F', 
-			fillOpacity: 0.25,
+			fillColor: '#F0F', 
+			fillOpacity: 0.5,
 			smoothFactor:0,
 			showArea:true
 		  };
@@ -128,11 +163,20 @@ function getParcels() {
 				coordArr.push(L.latLng(x, y));	
 			}
 
+			//Set id as className
+			poly_options["className"] = "poly_" + handle;
+
 			//Add to total area
 			totalArea += polygonArea(coordArr);
+			L.polygon(coordArr, poly_options).addTo(featureGroup).on('mouseover', function(){
+				var handle = this.options.className.replace("poly_", "");
+				$.get('_/php/parcels.php?handle_id='+handle, function(data) {
+					console.log(data[0]['address']);
+				});
+			});
+		}
 
-			L.polygon(coordArr, poly_options).addTo(featureGroup);
-		};
+		markersInView();
 	});
 }
 
