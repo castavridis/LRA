@@ -6,7 +6,7 @@
 	 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	 }
 
-	$sql = "SELECT ID, X, Y, LANDAREA \n"
+	$sql = "SELECT ID, X, Y, LANDAREA, APRLAND, USE_TYPE \n"
 			. "FROM bubbles";
 	$result = mysqli_query($link, $sql );
 
@@ -16,7 +16,9 @@
 			'id' => $row[0],
 			'x' => $row[1],
 			'y' => $row[2],
-			'landarea' => $row[3]
+			'landarea' => $row[3],
+			'aprland' => $row[4],
+			'use_type' => $row[5]
 		);
 	}
 

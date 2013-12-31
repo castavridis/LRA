@@ -23,9 +23,11 @@
 			);
 		}
 	}  else {
-		//If not set, get all parcel shapes:
-		$sql = "SELECT ID, WKT, HANDLE, PARCELID\n"
-			. "FROM parcel_shapes";
+		//If not set, get all parcel shapes and join with parcel:
+		$sql = "SELECT parcel_shapes.ID, parcel_shapes.WKT, parcel_shapes.HANDLE, parcel_shapes.PARCELID, parcels.USE_TYPE\n"
+			. "FROM parcel_shapes\n"
+			. "INNER JOIN parcels\n"
+			. "ON parcels.HANDLE = parcel_shapes.HANDLE";
 		$result = mysqli_query($link, $sql );
 
 		$data = array();
@@ -34,7 +36,8 @@
 				'id' => $row[0],
 				'polygon' => $row[1],
 				'handle' => $row[2],
-				'parcel_id' => $row[3]
+				'parcel_id' => $row[3],
+				'use_type' => $row[4]
 			);
 		}
 	}

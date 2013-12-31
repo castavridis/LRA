@@ -20,7 +20,8 @@ $(document).ready(function(){
 	map = L.mapbox.map('map-view',TILE_JSON, {
 		minZoom:12,
 		maxZoom:17,
-		maxBounds:[[38.5322,-90.4188],[38.7425,-90.0728]]
+		maxBounds:[[38.5322,-90.4188],[38.7425,-90.0728]],
+		markerZoomAnimation:false
 	});
 
 	//Add parcel features
@@ -114,9 +115,11 @@ function getBubbles() {
 		var featureGroup = L.featureGroup().addTo(map);
 		
 		var circle_options = {
-			stroke: false,
+			weight:1,
+			color: '#F90',
+			opacity:0.1,
 			fillColor: '#F90', 
-			fillOpacity: 0.125
+			fillOpacity: 0.05
 		  };
 
 		for (var i = data.length - 1; i >= 0; i--) {
@@ -124,9 +127,12 @@ function getBubbles() {
 				id = bubble['id'],
 				x = bubble['x'],
 				y = bubble['y'],
-				a = 100;//bubble['landarea']/100;
+				a = 100;//bubble['aprland']/100/2;
 
-			L.circle([y, x], a, circle_options).addTo(featureGroup);
+			circle_options["className"] = bubble['use_type'].split(" ").join("_");
+
+			L.circle([y, x], a, circle_options).addTo(featureGroup).on('mouseover', function(){
+			});
 		};
 	});
 }
@@ -165,6 +171,7 @@ function getParcels() {
 
 			//Set id as className
 			poly_options["className"] = "poly_" + handle;
+			poly_options["className"] += " " + parcel["use_type"].split(" ").join("_");
 
 			//Add to total area
 			totalArea += polygonArea(coordArr);
