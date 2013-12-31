@@ -37,7 +37,6 @@ body {
 #detail-view,
 #objectives-view {
   height: 100%;
-  display: none;
 }
 #map-view {
   background-color: antiquewhite;
@@ -48,6 +47,7 @@ body {
   right: 0px;
   position: absolute;
   overflow-y: auto;
+  display: none;
 }
 #objectives-view {
   background-color: salmon;
