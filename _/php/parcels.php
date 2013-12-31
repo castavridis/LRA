@@ -19,7 +19,8 @@
 		$data = array();
 		while ($row = mysqli_fetch_array($result)) {
 			$data[] = array(
-				'address' => $row[0]
+				'address' => $row[0],
+				'handle_id' => $handle_id
 			);
 		}
 	}  else {

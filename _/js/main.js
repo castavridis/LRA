@@ -176,9 +176,10 @@ function getParcels() {
 			//Add to total area
 			totalArea += polygonArea(coordArr);
 			L.polygon(coordArr, poly_options).addTo(featureGroup).on('mouseover', function(){
-				var handle = this.options.className.replace("poly_", "");
+				var handle = this.options.className.replace("poly_", "").split(" ")[0];
+				var marker = this;
 				$.get('_/php/parcels.php?handle_id='+handle, function(data) {
-					console.log(data[0]['address']);
+					marker.bindPopup("<p>"+ data[0]['address'] +"</p>").openPopup();
 				});
 			});
 		}
