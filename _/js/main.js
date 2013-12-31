@@ -49,10 +49,10 @@ $.get('_/php/parcels.php', function(data){
 	//Add feature group to map.
 	var featureGroup = L.featureGroup().addTo(map);
 	
-	var circle_options = {
+	var poly_options = {
 		stroke: false,
-		fillColor: '#F90', 
-		fillOpacity: 0.125
+		fillColor: '#09F', 
+		fillOpacity: 0.25
 	  };
 
 	for (var i = data.length - 1; i >= 0; i--) {
@@ -62,8 +62,18 @@ $.get('_/php/parcels.php', function(data){
 			handle = parcel['handle'],
 			parcel_id= parcel['parcel_id'];
 
-		//Parse polygon
-		//"POLYGON ((-90.195754044233894 38.615683089233187,-90.195755023849316 38.615680224945422,-90.196278510863394 38.615811462047404,-90.196277360645027 38.615814287020591,-90.195754044233894 38.615683089233187))"
-		//L.circle([y, x], frontage, circle_options).addTo(featureGroup);
+		//Parse polygon string
+		polygon = polygon.replace("POLYGON ((","").replace("))","");
+		var polyArr = polygon.split(',');
+		var coordArr = [];
+
+		for (var j = 0; j < polyArr.length; j++) {
+			var coordinates = polyArr[j].replace("(", "").replace(")", "").split(" ");
+			var x = coordinates[1];
+			var y = coordinates[0];
+			coordArr.push(L.latLng(x, y));	
+		}
+
+		L.polygon(coordArr, poly_options).addTo(featureGroup);
 	};
 });

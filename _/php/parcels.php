@@ -6,7 +6,7 @@
 	 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	 }
 
-	$sql = "SELECT ID, POLY, HANDLE, PARCELID \n"
+	$sql = "SELECT ID, WKT, HANDLE, PARCELID \n"
 			. "FROM parcel_shapes";
 	$result = mysqli_query($link, $sql );
 
